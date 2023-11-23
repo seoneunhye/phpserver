@@ -8,9 +8,14 @@
         v-for="product in products"
         :key="product.id"
       >
-        <p>상품명 : {{ product.name }}</p>
-        <p>설명 상세 : {{ product.description }}</p>
-        <p>상품 가격 : {{ product.price }}</p>
+        <span class="product__category">✔️상품명</span>
+        <span class="product__content">{{ product.name }}</span>
+        <span class="product__category">✔️설명 상세 </span>
+        <span class="product__content"> {{ product.description }}</span>
+        <span class="product__category">✔️상품 가격</span>
+        <span class="product__content">
+          {{ product.price.toLocaleString() }}</span
+        >
         <button class="btn" @click="handleDeleteProduct(product.id)">
           삭제
         </button>
@@ -58,13 +63,25 @@ onMounted(fetchProducts)
 
 <style>
 .header__title {
+  margin: 1.5rem;
   text-align: center;
+  font-size: 1.4rem;
+}
+.product__category {
+  display: block;
+  margin: 0.5rem;
+  line-height: 1.5;
+}
+.product__content {
+  display: block;
+  margin-bottom: 1rem;
 }
 .productList {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   list-style-type: none;
   padding: 0;
+  text-align: center;
 }
 .productList__item {
   border: 1px solid black;
@@ -78,7 +95,7 @@ onMounted(fetchProducts)
   padding: 10px;
   margin: 5%;
   border-radius: 10px;
-  font-weight: bold;
+  font-weight: bolder;
   cursor: pointer;
 }
 

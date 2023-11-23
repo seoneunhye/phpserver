@@ -44,7 +44,11 @@ class ProductsController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:15',
             'description' => 'required|max:50',
-            'price' => 'required|integer'
+            'price' => 'required|integer|max:100000'
+        ],[
+            'name.max'=> '상품명은 최대 15자까지 입력 가능합니다.',
+            'name.description' => '상품 설명은 최대 50자까지 입력 가능합니다.',
+            'price' => '상품 가격은 최대 10만원 까지 입력 가능합니다.'
         ]);
 
         // 제품 찾기, 없으면 404 응답
