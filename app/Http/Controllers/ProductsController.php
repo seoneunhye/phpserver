@@ -14,6 +14,15 @@ class ProductsController extends Controller
     return response()->json($products);
   }
 
+  // 제품 개별 목록 가져오기
+  public function show($id){
+    $product = Product::find($id);
+    if(!$product){
+        return response()->json(['message'=>'Product not found'],404);
+    }
+    return response()->json($product);
+  }
+
     // 새 상품 추가
     public function store(Request $request)
     {

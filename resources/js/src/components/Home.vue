@@ -14,7 +14,7 @@
         <button class="btn" @click="handleDeleteProduct(product.id)">
           삭제
         </button>
-        <button class="btn" @click="handleUpdateProduct(product.id)">
+        <button class="btn" @click="handleMoveToUpdateForm(product.id)">
           수정
         </button>
       </li>
@@ -24,8 +24,10 @@
 <script setup>
 import axios from 'axios'
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 const products = ref([])
+const router = useRouter()
 
 const fetchProducts = async () => {
   try {
@@ -36,10 +38,8 @@ const fetchProducts = async () => {
   }
 }
 
-const handleUpdateProduct = async id => {
-  try {
-    alert('힝 속았지 수정 만드는 중')
-  } catch {}
+const handleMoveToUpdateForm = async id => {
+  router.push(`/modify/${id}`)
 }
 
 const handleDeleteProduct = async id => {
@@ -64,6 +64,7 @@ onMounted(fetchProducts)
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   list-style-type: none;
+  padding: 0;
 }
 .productList__item {
   border: 1px solid black;
@@ -75,7 +76,7 @@ onMounted(fetchProducts)
   border: 1px solid black;
   text-decoration-line: none;
   padding: 10px;
-  margin-left: 90%;
+  margin: 5%;
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
