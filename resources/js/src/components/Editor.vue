@@ -24,7 +24,7 @@
       v-model="product.price"
     />
     <button
-      type="submit"
+      type="button"
       @click="handleSubmitProductForm"
       class="register__btn"
     >
@@ -35,15 +35,19 @@
 
 <script>
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import axios from 'axios'
 
 export default {
   setup() {
     const product = reactive({ name: '', description: '', price: '' })
+    const router = useRouter()
 
     const handleSubmitProductForm = async () => {
       try {
         await axios.post('/api/products', product)
+
+        await router.push({ name: 'home' })
       } catch (error) {
         console.log(error)
       }
