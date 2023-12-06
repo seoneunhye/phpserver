@@ -1,11 +1,12 @@
 <template>
-  <label :for="inputId">{{ labelText }}</label>
+  <label :for="inputId" class="mb-5">{{ labelText }}</label>
   <input
     :type="type"
     :id="inputId"
     :placeholder="placeholder"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
+    class="w-52 block border-solid border-2 mb-5 rounded-md"
   />
 </template>
 <script>
@@ -35,7 +36,7 @@ export default {
 </script>
 
 <style scoped>
-label {
+/* label {
   margin: 10px;
   font-size: large;
   font-weight: bold;
@@ -46,5 +47,5 @@ input {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 10px;
-}
+} */
 </style>

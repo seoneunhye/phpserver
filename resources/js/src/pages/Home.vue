@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <h1 class="header__title">10만원 이하만 파는 의류 쇼핑몰</h1>
+    <h1 class="text-center m-5 font-extrabold text-2xl">
+      10만원 이하만 파는 의류 쇼핑몰
+    </h1>
     <router-link to="/editor" class="editor__btn">상품 등록하기</router-link>
     <ul class="productList">
       <li
@@ -62,11 +64,6 @@ onMounted(fetchProducts)
 </script>
 
 <style>
-.header__title {
-  margin: 1.5rem;
-  text-align: center;
-  font-size: 1.4rem;
-}
 .product__category {
   display: block;
   margin: 0.5rem;

@@ -1,6 +1,6 @@
 <template>
   <router-link to="/" class="router__btn">메인으로</router-link>
-  <h2 class="header-title">상품 등록 페이지</h2>
+  <h2 class="text-center text-2xl font-extrabold">상품 등록 페이지</h2>
   <form class="">
     <FormInput
       inputId="productName"
@@ -75,9 +75,7 @@ export default {
   font-weight: bold;
   cursor: pointer;
 }
-.header-title {
-  text-align: center;
-}
+
 form {
   padding: 3rem;
   display: flex;
