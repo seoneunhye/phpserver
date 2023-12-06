@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hashtag extends Model
 {
-    // use HasFactory;
-    // protected $fillable = ['name'];
-    // public $timestamps = false;
+    protected $fillable = ['name'];
+    public $timestamps = false;
 
     public function products()
     {

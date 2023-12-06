@@ -1,7 +1,7 @@
 <template>
   <router-link to="/" class="router__btn">메인으로</router-link>
   <h2 class="text-center text-2xl font-extrabold">상품 등록 페이지</h2>
-  <form class="">
+  <form>
     <FormInput
       inputId="productName"
       labelText="상품명"
@@ -20,10 +20,12 @@
       placeholder="10만원 이하만 입력"
       v-model="product.price"
     />
+    <HashTagInp />
+    <!-- <Button buttonTxt="상품 등록" @click-button="handleSubmitProductForm" /> -->
     <button
       type="button"
       @click="handleSubmitProductForm"
-      class="register__btn"
+      class="rounded-lg border-2 p-2"
     >
       상품 등록
     </button>
@@ -31,14 +33,18 @@
 </template>
 
 <script>
-import FormInput from '../components/common/FormInput.vue'
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import FormInput from '../components/common/FormInput.vue'
+import HashTagInp from '../components/common/HashTagInp.vue'
+import Button from '../components/common/Button.vue'
 
 export default {
   components: {
-    FormInput
+    FormInput,
+    HashTagInp,
+    Button
   },
   setup() {
     const product = reactive({ name: '', description: '', price: '' })
@@ -94,12 +100,5 @@ input {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 10px;
-}
-.register__btn {
-  padding: 10px;
-  margin: 10px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
 }
 </style>
