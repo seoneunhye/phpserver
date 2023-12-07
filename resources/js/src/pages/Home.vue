@@ -4,9 +4,9 @@
       10만원 이하만 파는 의류 쇼핑몰
     </h1>
     <router-link to="/editor" class="editor__btn">상품 등록하기</router-link>
-    <ul class="productList">
+    <ul class="grid grid-cols-3 list-none m-5 gap-5">
       <li
-        class="productList__item"
+        class="border border-gray-500 rounded-md p-3"
         v-for="product in products"
         :key="product.id"
       >
@@ -18,49 +18,65 @@
         <span class="product__content">
           {{ product.price.toLocaleString() }}</span
         >
-        <button class="btn" @click="handleDeleteProduct(product.id)">
-          삭제
-        </button>
-        <button class="btn" @click="handleMoveToUpdateForm(product.id)">
-          수정
-        </button>
+        <Button
+          buttonTxt="삭제"
+          @click-button="handleDeleteProduct(product.id)"
+        />
+        <Button
+          buttonTxt="수정"
+          @click-button="handleMoveToUpdateForm(product.id)"
+        />
       </li>
     </ul>
   </div>
 </template>
-<script setup>
+<script>
 import axios from 'axios'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import Button from '../components/common/Button.vue'
 
-const products = ref([])
-const router = useRouter()
+export default {
+  components: {
+    Button
+  },
+  setup() {
+    const products = ref([])
+    const router = useRouter()
 
-const fetchProducts = async () => {
-  try {
-    const response = await axios.get('/api/products')
-    products.value = response.data
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-const handleMoveToUpdateForm = async id => {
-  router.push(`/modify/${id}`)
-}
-
-const handleDeleteProduct = async id => {
-  try {
-    if (confirm('상품을 삭제하시겠습니까?')) {
-      await axios.delete(`/api/products/${id}`)
-      products.value = products.value.filter(product => product.id !== id)
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('/api/products')
+        products.value = response.data
+      } catch (error) {
+        console.error(error)
+      }
     }
-  } catch (error) {
-    console.error(error)
+
+    const handleMoveToUpdateForm = async id => {
+      router.push(`/modify/${id}`)
+    }
+
+    const handleDeleteProduct = async id => {
+      try {
+        if (confirm('상품을 삭제하시겠습니까?')) {
+          await axios.delete(`/api/products/${id}`)
+          products.value = products.value.filter(product => product.id !== id)
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    onMounted(fetchProducts)
+    return {
+      fetchProducts,
+      handleMoveToUpdateForm,
+      handleDeleteProduct,
+      products
+    }
   }
 }
-
-onMounted(fetchProducts)
 </script>
 
 <style>
@@ -73,13 +89,7 @@ onMounted(fetchProducts)
   display: block;
   margin-bottom: 1rem;
 }
-.productList {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  list-style-type: none;
-  padding: 0;
-  text-align: center;
-}
+
 .productList__item {
   border: 1px solid black;
   border-radius: 10px;
@@ -93,14 +103,6 @@ onMounted(fetchProducts)
   margin: 5%;
   border-radius: 10px;
   font-weight: bolder;
-  cursor: pointer;
-}
-
-.btn {
-  padding: 10px;
-  margin: 10px;
-  border-radius: 10px;
-  font-weight: bold;
   cursor: pointer;
 }
 </style>

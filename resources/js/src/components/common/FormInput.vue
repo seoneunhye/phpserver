@@ -34,18 +34,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-/* label {
-  margin: 10px;
-  font-size: large;
-  font-weight: bold;
-}
-input {
-  width: 200px;
-  display: block;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 10px;
-} */
-</style>

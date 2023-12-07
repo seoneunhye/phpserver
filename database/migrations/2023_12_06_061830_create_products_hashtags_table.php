@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('products_hashtags', function (Blueprint $table) {
-            $table->primary(['product_id', 'hashtag_id']);
+            $table->id();
             $table->foreignId('product_id');
             $table->foreignId('hashtag_id');
         });

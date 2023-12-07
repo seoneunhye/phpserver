@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
@@ -24,33 +24,20 @@ class ProductsController extends Controller
         return response()->json($product);
     }
 
-    // 새 상품 추가
-    public function store(Request $request)
+    // 새 상품 추가(상품 등록하고 해시태그와 연결한다)
+    public function store(ProductRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:15',
-            'description' => 'required|max:50',
-            'price' => 'required|integer',
-        ]);
-
+        $validatedData = $request->validate();
         $product = Product::create($validatedData);
 
         return response()->json($product, 201);
     }
 
     // 제품 정보 수정
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         // 유효성 검사
-        $validatedData = $request->validate([
-            'name' => 'required|max:15',
-            'description' => 'required|max:50',
-            'price' => 'required|integer|max:100000',
-        ], [
-            'name.max' => '상품명은 최대 15자까지 입력 가능합니다.',
-            'name.description' => '상품 설명은 최대 50자까지 입력 가능합니다.',
-            'price' => '상품 가격은 최대 10만원 까지 입력 가능합니다.',
-        ]);
+        $validatedData = $request->validate();
 
         // 제품 찾기, 없으면 404 응답
         $product = Product::findOrFail($id);

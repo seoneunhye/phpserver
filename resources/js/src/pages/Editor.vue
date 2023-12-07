@@ -1,7 +1,7 @@
 <template>
   <router-link to="/" class="router__btn">메인으로</router-link>
   <h2 class="text-center text-2xl font-extrabold">상품 등록 페이지</h2>
-  <form>
+  <form @submit.prevent="handleSubmitProductForm">
     <FormInput
       inputId="productName"
       labelText="상품명"
@@ -21,14 +21,7 @@
       v-model="product.price"
     />
     <HashTagInp />
-    <!-- <Button buttonTxt="상품 등록" @click-button="handleSubmitProductForm" /> -->
-    <button
-      type="button"
-      @click="handleSubmitProductForm"
-      class="rounded-lg border-2 p-2"
-    >
-      상품 등록
-    </button>
+    <Button buttonTxt="상품 등록" />
   </form>
 </template>
 

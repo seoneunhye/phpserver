@@ -7,6 +7,7 @@
         id="hashtagInp"
         maxlength="10"
         required
+        placeholder="10자 이내로 작성"
         class="border-2 rounded-md w-32"
       />
 
